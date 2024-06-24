@@ -24,8 +24,8 @@ export const TaskFormContent = styled.form`
 
   button {
     display: flex;
-    width: 90px;
     border: 0;
+    padding: 16px;
     background: ${props => props.theme['blue-dark']};
     color: ${props => props.theme['gray-100']};
     font-weight: bold;
@@ -33,14 +33,13 @@ export const TaskFormContent = styled.form`
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    gap: 2px;
-    line-height: 0;
+    gap: 8px;
 
-    transition: background-color 0.2s;
+    transition: opacity 0.2s;
     cursor: pointer;
 
     &:hover {
-      background: ${props => props.theme['blue']};
+      opacity: 0.9;
     }
   }
 `;

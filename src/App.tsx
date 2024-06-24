@@ -3,6 +3,7 @@ import { defaultTheme } from "./styles/themes/default";
 import { GlobalStyle } from "./styles/global";
 import { Header } from "./components/Header";
 import { AddTaskForm } from "./components/AddTaskForm";
+import { TaskList } from "./components/TaskList";
 
 export function App() {
   return (
@@ -11,6 +12,7 @@ export function App() {
       
       <Header />
       <AddTaskForm />
+      <TaskList />
     </ThemeProvider>
   )
 }
