@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const TaskFormContainer = styled.div`
-  height: 54px;
   max-width: 736px;
   margin: 0 auto;
   margin-top: -1.75rem;
@@ -10,7 +9,7 @@ export const TaskFormContainer = styled.div`
 export const TaskFormContent = styled.form`
   display: flex;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 8px;
 
   input {
     flex: 1;
@@ -19,7 +18,7 @@ export const TaskFormContent = styled.form`
     height: 54px;
     border-radius: 8px;
     background: ${props => props.theme['gray-500']};
-    padding: 1rem;
+    padding: 16px;
   }
 
   button {

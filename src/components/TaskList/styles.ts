@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const TaskListContainer = styled.main`
   margin: 0 auto;
@@ -6,6 +6,10 @@ export const TaskListContainer = styled.main`
   max-width: 736px;
   height: 200px;
 `;
+
+interface TaskInfoContentProps {
+  variant: "blue" | "purple";
+}
 
 export const TaskListInfoContainer = styled.div`
   display: flex;
@@ -22,7 +26,15 @@ export const TaskListInfoContainer = styled.div`
   }
 `;
 
-export const TaskInfoProgress = styled.span`
+export const TaskInfoContent = styled.div<TaskInfoContentProps>`
+  ${props => props.variant === "blue" ? css`
+    color: ${props.theme["blue"]}  
+  `: css`
+    color: ${props.theme["purple"]}
+  `};
+`;
+
+export const TaskInfoCounter = styled.span`
   color: ${props => props.theme['gray-200']};
   background: ${props => props.theme['gray-400']};
 
@@ -32,17 +44,34 @@ export const TaskInfoProgress = styled.span`
 
 export const TaskListContent = styled.section`
 
-  div {
+`;
+
+export const TaskItem = styled.div`
+  display: flex;
+  height: 72px;
+  background: brown;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: ${props => props.theme['gray-500']};
+  
+  form {
+    color: ${props => props.theme['gray-100']};
     align-items: center;
     justify-content: center;
-    display: flex;
-    flex-direction: column;
-    padding: 64px 24px 64px 24px;
-    color: ${props => props.theme['gray-300']};
-  }
 
-  span {
-    margin-top: 1rem;
-    font-weight: bold;
+    input {
+      width: 18px;
+      height: 18px;
+      appearance: none;
+      border: 2px solid ${props => props.theme['blue']};
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: transparent;
+    }
+
+    input:checked {
+      background-color: ${props => props.theme['purple']};
+      appearance: text-field;
+    }
   }
-`;
+`
