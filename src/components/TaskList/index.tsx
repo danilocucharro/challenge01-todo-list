@@ -1,11 +1,12 @@
 import {
   TaskListContainer,
   TaskListInfoContainer, 
-  TaskListContent, 
   TaskInfoCounter, 
   TaskInfoContent, 
-  TaskItem } 
-from "./styles";
+  TaskItem, 
+  TaskListContentEmpty,
+  TaskListItems
+} from "./styles";
 
 import svgClipboard from "../../assets/Clipboard.svg";
 import { useState } from "react";
@@ -25,34 +26,47 @@ export function TaskList() {
       <TaskListInfoContainer>
         <TaskInfoContent variant="blue">
           <span>Tarefas criadas</span>
-          <TaskInfoCounter>0</TaskInfoCounter>
+          <TaskInfoCounter>5</TaskInfoCounter>
         </TaskInfoContent>
 
         <TaskInfoContent variant="purple">
           <span>Concluídas</span>
-          <TaskInfoCounter>0</TaskInfoCounter>
+          <TaskInfoCounter>2 de 5</TaskInfoCounter>
         </TaskInfoContent>
       </TaskListInfoContainer>
 
-      <TaskListContent>
-        {tasks.length > 1 ?
-        <div>
+      <section>
+        {tasks.length < 1 ?
+        <TaskListContentEmpty>
           <img src={svgClipboard} />
-          <span>Você ainda não tem tarefas cadastradas</span> Crie tarefas e organize seus itens a fazer
-        </div>
+          <p><span>Você ainda não tem tarefas cadastradas</span> <br/>Crie tarefas e organize seus itens a fazer</p>
+        </TaskListContentEmpty>
         :
-        <TaskItem>
+        <TaskListItems>
+          <TaskItem>
+            <form>
+              <input type="checkbox" />
+              <label>Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.</label>
+            </form>
+
+            <button>
+              <Trash size={20} />
+            </button>
+          </TaskItem>
+
+          <TaskItem>
           <form>
             <input type="checkbox" />
             <label>Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.</label>
           </form>
 
           <button>
-            <Trash />
+            <Trash size={20} />
           </button>
-        </TaskItem>
+          </TaskItem>
+        </TaskListItems>
         }
-      </TaskListContent>
+      </section>
     </TaskListContainer>
   )
 }
