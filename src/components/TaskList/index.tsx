@@ -35,6 +35,12 @@ export function TaskList() {
     ])
   }
 
+  function handleDeleteTask(description: string) {
+    const newTaskList = tasks.filter((task) => task.description != description)
+
+    setTasks(newTaskList)
+  }
+
   return(
     <main>
     <TaskFormContainer>
@@ -59,7 +65,7 @@ export function TaskList() {
       <TaskListInfoContainer>
         <TaskInfoContent variant="blue">
           <span>Tarefas criadas</span>
-          <TaskInfoCounter>5</TaskInfoCounter>
+          <TaskInfoCounter>{tasks.length}</TaskInfoCounter>
         </TaskInfoContent>
 
         <TaskInfoContent variant="purple">
@@ -81,6 +87,7 @@ export function TaskList() {
               key={task.description}
               description={task.description}
               isDone={task.isDone}
+              deleteTask={handleDeleteTask}
             />
           ))}
         </TaskListItems>

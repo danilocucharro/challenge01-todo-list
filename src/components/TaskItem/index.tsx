@@ -3,7 +3,8 @@ import { Trash } from "phosphor-react";
 
 interface TaskItemProps {
   description: string,
-  isDone?: boolean
+  isDone?: boolean,
+  deleteTask: (description: string) => void;
 }
 
 export function TaskItem (props: TaskItemProps) {
@@ -14,7 +15,7 @@ export function TaskItem (props: TaskItemProps) {
         <label>{props.description}</label>
       </form>
 
-      <button>
+      <button onClick={() => props.deleteTask(props.description)}>
         <Trash size={20} />
       </button>
     </TaskItemContent>
