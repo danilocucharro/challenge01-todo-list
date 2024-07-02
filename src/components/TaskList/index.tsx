@@ -3,25 +3,58 @@ import {
   TaskListInfoContainer, 
   TaskInfoCounter, 
   TaskInfoContent, 
-  TaskItem, 
   TaskListContentEmpty,
-  TaskListItems
+  TaskListItems,
+  TaskFormContainer,
+  TaskFormContent
 } from "./styles";
 
+import { TaskItem } from "../TaskItem";
 import svgClipboard from "../../assets/Clipboard.svg";
 import { useState } from "react";
-import { Trash } from "phosphor-react";
+import { PlusCircle } from "phosphor-react";
 
 interface TasksProps{
-  id: number,
   description: string,
   isDone: boolean,
 }
 
 export function TaskList() {
+  const [newTask, setNewTask] = useState("")
   const [tasks, setTasks] = useState<TasksProps[]>([])
 
+  function handleCreateNewTask() {
+    event?.preventDefault()
+
+    setTasks([
+      ...tasks,
+      {
+        description: newTask,
+        isDone: false
+      }
+    ])
+  }
+
   return(
+    <main>
+    <TaskFormContainer>
+      <TaskFormContent onSubmit={handleCreateNewTask}>
+        <input 
+          type="text" 
+          placeholder="Adicionar uma nova tarefa" 
+          onChange={(e) => setNewTask(e.target.value)}
+          required
+        />
+
+        <button
+          type="submit"
+        >
+          Criar
+          <PlusCircle size={20}/>
+        </button>
+      </TaskFormContent>
+    </TaskFormContainer>
+
     <TaskListContainer>
       <TaskListInfoContainer>
         <TaskInfoContent variant="blue">
@@ -43,30 +76,17 @@ export function TaskList() {
         </TaskListContentEmpty>
         :
         <TaskListItems>
-          <TaskItem>
-            <form>
-              <input type="checkbox" />
-              <label>Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.</label>
-            </form>
-
-            <button>
-              <Trash size={20} />
-            </button>
-          </TaskItem>
-
-          <TaskItem>
-          <form>
-            <input type="checkbox" />
-            <label>Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.</label>
-          </form>
-
-          <button>
-            <Trash size={20} />
-          </button>
-          </TaskItem>
+          {tasks.map((task) => (
+            <TaskItem 
+              key={task.description}
+              description={task.description}
+              isDone={task.isDone}
+            />
+          ))}
         </TaskListItems>
         }
       </section>
     </TaskListContainer>
+    </main>
   )
 }

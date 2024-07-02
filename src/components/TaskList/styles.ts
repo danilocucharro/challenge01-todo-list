@@ -1,5 +1,48 @@
 import styled, { css } from "styled-components";
 
+export const TaskFormContainer = styled.div`
+  max-width: 736px;
+  margin: 0 auto;
+  margin-top: -1.75rem;
+`;
+
+export const TaskFormContent = styled.form`
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+
+  input {
+    flex: 1;
+    border: 1px solid ${props => props.theme['gray-700']};
+    color: ${props => props.theme['gray-300']};
+    height: 54px;
+    border-radius: 8px;
+    background: ${props => props.theme['gray-500']};
+    padding: 16px;
+  }
+
+  button {
+    display: flex;
+    border: 0;
+    padding: 16px;
+    background: ${props => props.theme['blue-dark']};
+    color: ${props => props.theme['gray-100']};
+    font-weight: bold;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    gap: 8px;
+
+    transition: opacity 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+`;
+
 export const TaskListContainer = styled.main`
   margin: 0 auto;
   margin-top: 4rem;
@@ -62,45 +105,4 @@ export const TaskListItems = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-`
-
-export const TaskItem = styled.div`
-  display: flex;
-  height: 72px;
-  padding: 16px;
-  border-radius: 8px;
-  background-color: ${props => props.theme['gray-500']};
-  gap: 12px;
-
-  form {
-    color: ${props => props.theme['gray-100']};
-    display: flex;
-    gap: 12px;
-
-    input[type='checkbox'] {
-      appareance: none;
-      width: 18px;
-      height: 18px;
-      border: 2px solid ${props => props.theme['blue']};
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    input[type='checkbox']:checked {
-      background-color: ${props => props.theme['purple-dark']};
-    }
-
-    label {
-      font-size: 14px;
-    }
-  }
-
-  button {
-    display: flex;
-    height: 20px;
-    border: 0;
-    background: transparent;
-    color: ${props => props.theme['gray-300']};
-    cursor: pointer;
-  }
-`
+`;
