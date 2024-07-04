@@ -15,6 +15,7 @@ import { useState } from "react";
 import { PlusCircle } from "phosphor-react";
 
 interface TasksProps{
+  id: string,
   description: string,
   isDone: boolean,
 }
@@ -29,16 +30,48 @@ export function TaskList() {
     setTasks([
       ...tasks,
       {
+        id: newTask.concat(String(Math.random() * (1 - 100) + 1)),
         description: newTask,
         isDone: false
       }
     ])
+
+    console.log(tasks)
   }
 
-  function handleDeleteTask(description: string) {
-    const newTaskList = tasks.filter((task) => task.description != description)
+  function handleDeleteTask(id: string) {
+    const newTaskList = tasks.filter((task) => task.id != id)
 
     setTasks(newTaskList)
+  }
+
+  function handleChangeTaskStatus(task: TasksProps) {
+    const newTaskList = tasks.filter((taskItem) => taskItem.id != task.id)
+
+    if(task.isDone == false){
+      setTasks([
+        ...newTaskList,
+        {
+          id: task.id,
+          description: task.description,
+          isDone: !task.isDone
+        }
+      ])
+  
+      console.log(tasks)
+    }
+    else {
+      setTasks([
+        {
+          id: task.id,
+          description: task.description,
+          isDone: !task.isDone
+        },
+        ...newTaskList
+      ])
+  
+      console.log(tasks)
+    }
   }
 
   return(
@@ -84,10 +117,12 @@ export function TaskList() {
         <TaskListItems>
           {tasks.map((task) => (
             <TaskItem 
-              key={task.description}
+              id={task.id}
+              key={task.id}
               description={task.description}
               isDone={task.isDone}
               deleteTask={handleDeleteTask}
+              changeTaskStatus={handleChangeTaskStatus}
             />
           ))}
         </TaskListItems>

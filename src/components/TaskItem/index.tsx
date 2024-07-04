@@ -2,20 +2,25 @@ import { TaskItemContent } from './styles';
 import { Trash } from "phosphor-react";
 
 interface TaskItemProps {
+  id: string,
   description: string,
-  isDone?: boolean,
-  deleteTask: (description: string) => void;
+  isDone: boolean,
+  deleteTask: (description: string) => void,
+  changeTaskStatus: (task: {id: string, description: string, isDone: boolean}) => void,
 }
 
 export function TaskItem (props: TaskItemProps) {
   return(
     <TaskItemContent>
-      <form>
-        <input type="checkbox" checked={props.isDone} onChange={() => !props.isDone}/>
+      <div>
+        <input 
+          type="checkbox"
+          onChange={() => props.changeTaskStatus(props)}
+        />
         <label>{props.description}</label>
-      </form>
+      </div>
 
-      <button onClick={() => props.deleteTask(props.description)}>
+      <button onClick={() => props.deleteTask(props.id)}>
         <Trash size={20} />
       </button>
     </TaskItemContent>

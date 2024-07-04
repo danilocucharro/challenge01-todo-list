@@ -8,22 +8,24 @@ export const TaskItemContent = styled.div`
   background-color: ${props => props.theme['gray-500']};
   gap: 12px;
 
-  form {
+  div {
     color: ${props => props.theme['gray-100']};
     display: flex;
     gap: 12px;
 
     input[type='checkbox'] {
-      appareance: none;
+      appearance: none;
       width: 18px;
       height: 18px;
       border: 2px solid ${props => props.theme['blue']};
       border-radius: 50%;
       cursor: pointer;
+      transition: 0.2s;
     }
 
     input[type='checkbox']:checked {
       background-color: ${props => props.theme['purple-dark']};
+      border: 2px solid ${props => props.theme['purple-dark']};
     }
 
     label {
@@ -39,5 +41,11 @@ export const TaskItemContent = styled.div`
     background: transparent;
     color: ${props => props.theme['gray-300']};
     cursor: pointer;
+    transition: color 0.1s;
+
+    &:hover{
+      color: ${props => props.theme['danger']};
+    }
   }
+
 `;
