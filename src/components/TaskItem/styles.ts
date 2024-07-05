@@ -1,6 +1,10 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 
-export const TaskItemContent = styled.div`
+interface TaskItemContentProps {
+  finished: boolean
+}
+
+export const TaskItemContent = styled.div<TaskItemContentProps>`
   display: flex;
   height: 72px;
   padding: 16px;
@@ -9,18 +13,19 @@ export const TaskItemContent = styled.div`
   gap: 12px;
 
   div {
-    color: ${props => props.theme['gray-100']};
     display: flex;
+    font-size: 14px;
     gap: 12px;
 
     input[type='checkbox'] {
       appearance: none;
-      width: 18px;
-      height: 18px;
+      width: 1.2rem;
+      height: 1.2rem;
       border: 2px solid ${props => props.theme['blue']};
       border-radius: 50%;
       cursor: pointer;
       transition: 0.2s;
+      gap: 12px;
     }
 
     input[type='checkbox']:checked {
@@ -29,7 +34,13 @@ export const TaskItemContent = styled.div`
     }
 
     label {
-      font-size: 14px;
+      transition: color 0.5s;
+      ${props => props.finished === false ? css`
+      color: ${props.theme['gray-100']}`
+      : css`
+      color: ${props.theme['gray-300']};
+      text-decoration: line-through;
+      `}
     }
   }
 
@@ -47,5 +58,4 @@ export const TaskItemContent = styled.div`
       color: ${props => props.theme['danger']};
     }
   }
-
 `;
