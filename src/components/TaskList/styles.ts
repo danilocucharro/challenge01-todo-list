@@ -47,7 +47,7 @@ export const TaskListContainer = styled.main`
   margin: 0 auto;
   margin-top: 4rem;
   max-width: 736px;
-  height: 200px;
+  height: auto;
 `;
 
 interface TaskInfoContentProps {
@@ -70,10 +70,10 @@ export const TaskListInfoContainer = styled.div`
 
 export const TaskInfoContent = styled.div<TaskInfoContentProps>`
   ${props => props.variant === "blue" ? css`
-    color: ${props.theme["blue"]}  
+    color: ${props.theme["blue"]};
   `: css`
-    color: ${props.theme["purple"]}
-  `};
+    color: ${props.theme["purple"]};
+  `}
 `;
 
 export const TaskInfoCounter = styled.span`

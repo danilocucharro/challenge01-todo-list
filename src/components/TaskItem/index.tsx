@@ -11,7 +11,7 @@ interface TaskItemProps {
 
 export function TaskItem (props: TaskItemProps) {
   return(
-    <TaskItemContent finished={props.isDone}>
+    <TaskItemContent finished={props.isDone.toString()}>
       <div>
         <input 
           type="checkbox"

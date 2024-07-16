@@ -1,7 +1,7 @@
 import { css, styled } from "styled-components";
 
 interface TaskItemContentProps {
-  finished: boolean
+  finished: string
 }
 
 export const TaskItemContent = styled.div<TaskItemContentProps>`
@@ -10,22 +10,25 @@ export const TaskItemContent = styled.div<TaskItemContentProps>`
   padding: 16px;
   border-radius: 8px;
   background-color: ${props => props.theme['gray-500']};
-  gap: 12px;
 
   div {
     display: flex;
     font-size: 14px;
-    gap: 12px;
+    justify-content: space-around;
 
     input[type='checkbox'] {
       appearance: none;
-      width: 1.2rem;
-      height: 1.2rem;
+      width: 18px;
+      height: 18px;
+      margin-right: 12px;
       border: 2px solid ${props => props.theme['blue']};
       border-radius: 50%;
       cursor: pointer;
       transition: 0.2s;
-      gap: 12px;
+    }
+
+    input[type='checkbox']:hover {
+      opacity: 0.5;
     }
 
     input[type='checkbox']:checked {
@@ -34,8 +37,8 @@ export const TaskItemContent = styled.div<TaskItemContentProps>`
     }
 
     label {
-      transition: color 0.5s;
-      ${props => props.finished === false ? css`
+      transition: 0.5s;
+      ${props => props.finished === "false" ? css`
       color: ${props.theme['gray-100']}`
       : css`
       color: ${props.theme['gray-300']};

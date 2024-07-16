@@ -21,8 +21,9 @@ interface TasksProps{
 }
 
 export function TaskList() {
-  const [newTask, setNewTask] = useState("")
+  const [newTask, setNewTask] = useState<string>("")
   const [tasks, setTasks] = useState<TasksProps[]>([])
+  const [taskFinishedCounter, setTaskFinishedCounter] = useState(0)
 
   function handleCreateNewTask() {
     event?.preventDefault()
@@ -30,7 +31,7 @@ export function TaskList() {
     setTasks([
       ...tasks,
       {
-        id: newTask.concat(String(Math.random() * (1 - 100) + 1)),
+        id: newTask.concat((Math.random() * (100 - 0) + 0).toFixed(2)),
         description: newTask,
         isDone: false
       }
@@ -57,6 +58,8 @@ export function TaskList() {
           isDone: !task.isDone
         }
       ])
+
+      setTaskFinishedCounter(taskFinishedCounter + 1)
   
       console.log(tasks)
     }
@@ -70,7 +73,7 @@ export function TaskList() {
         ...newTaskList
       ])
   
-      console.log(tasks)
+      setTaskFinishedCounter(taskFinishedCounter - 1)
     }
   }
 
@@ -103,7 +106,7 @@ export function TaskList() {
 
         <TaskInfoContent variant="purple">
           <span>Concluídas</span>
-          <TaskInfoCounter>2 de 5</TaskInfoCounter>
+          <TaskInfoCounter>{taskFinishedCounter} de {tasks.length}</TaskInfoCounter>
         </TaskInfoContent>
       </TaskListInfoContainer>
 
