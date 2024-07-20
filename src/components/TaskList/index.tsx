@@ -29,21 +29,28 @@ export function TaskList() {
     event?.preventDefault()
 
     setTasks([
-      ...tasks,
       {
         id: newTask.concat((Math.random() * (100 - 0) + 0).toFixed(2)),
         description: newTask,
         isDone: false
-      }
+      },
+      ...tasks
     ])
 
-    console.log(tasks)
+    const formTask = document.getElementById("formTask") as HTMLFormElement
+    formTask.reset()
   }
 
-  function handleDeleteTask(id: string) {
+  function handleDeleteTask(id: string, isDone: boolean) {
     const newTaskList = tasks.filter((task) => task.id != id)
-
-    setTasks(newTaskList)
+    
+    if(isDone){
+      setTasks(newTaskList)
+      setTaskFinishedCounter(taskFinishedCounter - 1)
+    }
+    else{
+      setTasks(newTaskList)
+    }
   }
 
   function handleChangeTaskStatus(task: TasksProps) {
@@ -80,7 +87,7 @@ export function TaskList() {
   return(
     <main>
     <TaskFormContainer>
-      <TaskFormContent onSubmit={handleCreateNewTask}>
+      <TaskFormContent onSubmit={handleCreateNewTask} id="formTask">
         <input 
           type="text" 
           placeholder="Adicionar uma nova tarefa" 
@@ -117,18 +124,20 @@ export function TaskList() {
           <p><span>Você ainda não tem tarefas cadastradas</span> <br/>Crie tarefas e organize seus itens a fazer</p>
         </TaskListContentEmpty>
         :
-        <TaskListItems>
-          {tasks.map((task) => (
-            <TaskItem 
-              id={task.id}
-              key={task.id}
-              description={task.description}
-              isDone={task.isDone}
-              deleteTask={handleDeleteTask}
-              changeTaskStatus={handleChangeTaskStatus}
-            />
-          ))}
-        </TaskListItems>
+        <div>
+          <TaskListItems>
+            {tasks.map((task) => (
+              <TaskItem 
+                id={task.id}
+                key={task.id}
+                description={task.description}
+                isDone={task.isDone}
+                deleteTask={handleDeleteTask}
+                changeTaskStatus={handleChangeTaskStatus}
+              />
+            ))}
+          </TaskListItems>
+        </div>
         }
       </section>
     </TaskListContainer>

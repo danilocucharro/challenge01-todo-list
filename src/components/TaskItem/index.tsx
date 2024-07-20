@@ -5,7 +5,7 @@ interface TaskItemProps {
   id: string,
   description: string,
   isDone: boolean,
-  deleteTask: (description: string) => void,
+  deleteTask: (id: string, isDone: boolean) => void,
   changeTaskStatus: (task: {id: string, description: string, isDone: boolean}) => void,
 }
 
@@ -13,14 +13,16 @@ export function TaskItem (props: TaskItemProps) {
   return(
     <TaskItemContent finished={props.isDone.toString()}>
       <div>
-        <input 
-          type="checkbox"
-          onChange={() => props.changeTaskStatus(props)}
-        />
+        <div>
+          <input 
+            type="checkbox"
+            onChange={() => props.changeTaskStatus(props)}
+          />
+        </div>
         <label>{props.description}</label>
       </div>
 
-      <button onClick={() => props.deleteTask(props.id)}>
+      <button onClick={() => props.deleteTask(props.id, props.isDone)}>
         <Trash size={20} />
       </button>
     </TaskItemContent>
